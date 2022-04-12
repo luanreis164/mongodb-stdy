@@ -1,6 +1,7 @@
 package com.lr.mongodbstd.service;
 
 import com.lr.mongodbstd.domain.User;
+import com.lr.mongodbstd.dto.UserDTO;
 import com.lr.mongodbstd.repository.UserRepository;
 import com.lr.mongodbstd.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,12 @@ public class UserService {
         return user.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
 
+    public User insert(User obj){
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO userDTO){
+        return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
+    }
 
 }
