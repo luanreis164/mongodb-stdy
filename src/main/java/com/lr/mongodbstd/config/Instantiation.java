@@ -2,6 +2,7 @@ package com.lr.mongodbstd.config;
 
 import com.lr.mongodbstd.domain.Post;
 import com.lr.mongodbstd.domain.User;
+import com.lr.mongodbstd.dto.AuthorDTO;
 import com.lr.mongodbstd.repository.PostRepository;
 import com.lr.mongodbstd.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,12 @@ public class Instantiation implements CommandLineRunner {
         User luffy = new User(null,"Luffy","luffy@gmail.com");
         User naruto = new User(null,"Naruto","Naruto@gmail.com");
 
-        Post post1 = new Post(null,sdf.parse("13/04/2022"),"GOMU GOMU NO !","ROCKETTT!",luffy);
-        Post post2 = new Post(null,sdf.parse("14/04/2022"),"Freeza!","Por que matou o kuririn?",goku);
-
         userRepository.saveAll(Arrays.asList(goku,luffy,naruto));
+
+        Post post1 = new Post(null,sdf.parse("13/04/2022"),"GOMU GOMU NO !","ROCKETTT!",new AuthorDTO(luffy));
+        Post post2 = new Post(null,sdf.parse("14/04/2022"),"Freeza!","Por que matou o kuririn?",new AuthorDTO(goku));
+
+        
         postRepository.saveAll(Arrays.asList(post1,post2));
 
     }
