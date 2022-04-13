@@ -1,5 +1,6 @@
 package com.lr.mongodbstd.resources;
 
+import com.lr.mongodbstd.domain.Post;
 import com.lr.mongodbstd.domain.User;
 import com.lr.mongodbstd.dto.UserDTO;
 import com.lr.mongodbstd.service.UserService;
@@ -30,6 +31,12 @@ public class UserResource {
     public ResponseEntity<UserDTO> findById(@PathVariable String id){
         User obj = service.findById(id);
         return ResponseEntity.ok().body(new UserDTO(obj));
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 
     @PostMapping

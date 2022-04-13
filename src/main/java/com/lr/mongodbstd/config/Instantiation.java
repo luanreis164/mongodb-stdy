@@ -40,8 +40,13 @@ public class Instantiation implements CommandLineRunner {
         Post post1 = new Post(null,sdf.parse("13/04/2022"),"GOMU GOMU NO !","ROCKETTT!",new AuthorDTO(luffy));
         Post post2 = new Post(null,sdf.parse("14/04/2022"),"Freeza!","Por que matou o kuririn?",new AuthorDTO(goku));
 
-        
+
         postRepository.saveAll(Arrays.asList(post1,post2));
+
+        goku.getPosts().addAll(Arrays.asList(post2));
+        luffy.getPosts().addAll(Arrays.asList(post1));
+
+        userRepository.saveAll(Arrays.asList(goku,luffy));
 
     }
 
