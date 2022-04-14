@@ -16,10 +16,13 @@ public class PostService {
 
     @Autowired
     private PostRepository repo;
-
+    //Metodo de busca por email
     public Post findById(String id){
         Optional<Post> post = repo.findById(id);
         return post.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
-
+    //Metodo de busca por texto
+    public List<Post> findByTitle(String text){
+        return repo.findByTitleContainingIgnoreCase(text);
+    }
 }
